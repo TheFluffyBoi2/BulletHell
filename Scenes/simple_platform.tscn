@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1k0v0ja6gl8v"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_esbwk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_psqej"]
+size = Vector2(42, 11)
+
+[node name="SimplePlatform" type="Node2D"]
+
+[node name="Platform" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform"]
+texture_filter = 1
+texture = SubResource("CompressedTexture2D_esbwk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(0, 4.5)
+shape = SubResource("RectangleShape2D_psqej")

@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://5fm6ctgiudq"]
+
+[ext_resource type="PackedScene" uid="uid://d26lciel4sfwp" path="res://player.tscn" id="1_66duu"]
+[ext_resource type="Texture2D" uid="uid://ckfsd0dolrsbw" path="res://Sprites/Tiles/magic-tile.png" id="2_jhp3i"]
+[ext_resource type="PackedScene" uid="uid://d0ieov6jmqcjr" path="res://no_teleport.tscn" id="3_e8068"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mabl1"]
+texture = ExtResource("2_jhp3i")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.8059, 8, -6.89429, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -6.8059, 8, -6.89429, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_tipb5"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_mabl1")
+
+[sub_resource type="GDScript" id="GDScript_cw2cg"]
+script/source = "extends Node
+
+func _ready():
+	for child in get_children():
+		var area = child
+		print(area)
+		area.mouse_enter.connect(_on_mouse_enter)
+		area.mouse_exit.connect(_on_mouse_exit)
+
+func _process(delta):
+	pass
+	
+func _on_mouse_enter():
+	pass
+	
+func _on_mouse_exit():
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guu5e"]
+size = Vector2(320, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rx64o"]
+size = Vector2(160, 97)
+
+[node name="TestWorld" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_66duu")]
+z_index = 1
+position = Vector2(-44, -27)
+teleport_cooldown = true
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = SubResource("TileSet_tipb5")
+format = 2
+layer_0/tile_data = PackedInt32Array(65533, 0, 0, 131069, 0, 1, 65534, 65536, 0, 131070, 65536, 1, 65535, 0, 0, 131071, 0, 1, 0, 65536, 0, 65536, 65536, 1, 1, 0, 0, 65537, 0, 1, 2, 65536, 0, 65538, 65536, 1, 3, 0, 0, 65539, 0, 1, 4, 65536, 0, 65540, 65536, 1, 5, 0, 0, 65541, 0, 1, 6, 65536, 0, 65542, 65536, 1, 7, 0, 0, 65543, 0, 1, 8, 65536, 0, 65544, 65536, 1, 65531, 0, 0, 131067, 0, 1, 65532, 65536, 0, 131068, 65536, 1, 65529, 0, 0, 131065, 0, 1, 65530, 65536, 0, 131066, 65536, 1, 9, 0, 0, 65545, 0, 1, 10, 65536, 0, 65546, 65536, 1, 11, 0, 0, 65547, 0, 1, 12, 65536, 0, 65548, 65536, 1, 15, 0, 0, 65551, 0, 1, 16, 65536, 0, 65552, 65536, 1, 17, 0, 0, 65553, 0, 1, 18, 65536, 0, 65554, 65536, 1, 19, 0, 0, 65555, 0, 1, 20, 65536, 0, 65556, 65536, 1, 21, 0, 0, 65557, 0, 1, 22, 65536, 0, 65558, 65536, 1, 23, 0, 0, 65559, 0, 1, 24, 65536, 0, 65560, 65536, 1)
+
+[node name="NoTeleportAreas" type="Node" parent="."]
+script = SubResource("GDScript_cw2cg")
+
+[node name="NoTeleport" parent="NoTeleportAreas" instance=ExtResource("3_e8068")]
+position = Vector2(-86, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoTeleportAreas/NoTeleport"]
+position = Vector2(134, 38)
+shape = SubResource("RectangleShape2D_guu5e")
+
+[node name="NoTeleport2" parent="NoTeleportAreas" instance=ExtResource("3_e8068")]
+position = Vector2(304, 21)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoTeleportAreas/NoTeleport2"]
+position = Vector2(16, 28.5)
+shape = SubResource("RectangleShape2D_rx64o")

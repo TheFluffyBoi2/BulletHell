@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://caa5t2aqbehix"]
+
+[sub_resource type="Curve" id="Curve_6ybws"]
+_data = [Vector2(0, 1), 0.0, -0.384615, 0, 1, Vector2(1, 0.615385), -0.384615, 0.0, 1, 0]
+point_count = 2
+
+[node name="landing_particle" type="CPUParticles2D"]
+z_index = 2
+emitting = false
+lifetime = 0.12
+one_shot = true
+speed_scale = 0.45
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(5, 0)
+spread = 20.0
+gravity = Vector2(0, -900)
+angular_velocity_min = 101.82
+angular_velocity_max = 349.09
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_6ybws")

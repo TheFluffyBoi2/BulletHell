@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://5fm6ctgiudq"]
+
+[ext_resource type="PackedScene" uid="uid://d26lciel4sfwp" path="res://player.tscn" id="1_66duu"]
+[ext_resource type="PackedScene" uid="uid://c1k0v0ja6gl8v" path="res://simple_platform.tscn" id="2_ba2v8"]
+
+[node name="TestWorld" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_66duu")]
+z_index = 1
+position = Vector2(6, 14)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(164, -42)
+zoom = Vector2(2.485, 2.485)
+
+[node name="SimplePlatform" parent="." instance=ExtResource("2_ba2v8")]
+position = Vector2(131, 44)
+scale = Vector2(7.645, 3.58)
